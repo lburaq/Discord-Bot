@@ -22,6 +22,10 @@ module.exports = {
         };
 
         const kanaltype = interaction.guild.channels.cache.get(kategori)
+        const kategoritype = interaction.guild.roles.cache.get(server);
+       if(kategoritype === undefined){
+        return interaction.reply({content: "**yetkili-rol-id** kısmı bir Rol id'si olmak zorunda!", ephemeral: true})
+       }
        if(kanaltype.type !== 4)
             return interaction.reply({content: "**kategori-id** kısmı bir kategori id'si olmak zorunda!", ephemeral: true})
         
@@ -34,7 +38,7 @@ module.exports = {
                 var liste = obj.sunucular;
 
                  liste.filter((x)=> {
-                    if(x.sunucu === interaction.guild.name){
+                    if(x.sunucu === interaction.guildId){
                         x.yetkili = server;
                         x.kategori = kategori;
                         json = JSON.stringify(obj);

@@ -6,7 +6,8 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('destek')
 		.setDescription('Yardım için destek oluştur')
-		.addStringOption((option) => option.setName('mesaj').setDescription('Lütfen sorununu belirt').setRequired(true)),
+		.addStringOption((option) => option.setName('mesaj').setDescription('Lütfen sorununu belirt').setRequired(true))
+        .setDMPermission(false),
 	async execute(client,interaction) {
 		var mesaj = interaction.options.getString("mesaj");
         var obj = {
@@ -23,10 +24,10 @@ module.exports = {
             obj = JSON.parse(data);
             liste = obj.sunucular;
              liste.filter(async (x) => {
-                if (x.sunucu === interaction.guild.name) {
+                if (x.sunucu === interaction.guildId) {
                     yetkili = x.yetkili;
                     var kanalname = "destek" + interaction.user.id;
-                    var kanalid = client.channels.cache.find(c => c.name === kanalname);
+                    var kanalid = client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.name === kanalname);
                     if (kanalid) {
                         return interaction.reply({ content: `Zaten destek kanalı oluşturdunuz kanal: ${kanalid}`, ephemeral: true });
                     }
@@ -57,7 +58,7 @@ module.exports = {
                         var embed = new EmbedBuilder()
                             .setThumbnail(interaction.user.displayAvatarURL())
                             .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
-                            .setFooter({ text: "Test Yönetim", iconURL: "https://cdn.discordapp.com/avatars/235139194853392384/a_eec086b138944d63451503e232b4c966.gif?size=128" })
+                            .setFooter({ text: `${interaction.guild.name} Yönetim`, iconURL: interaction.guild.iconURL()})
                             .addFields({ name: "Kullanıcı", value: `<@${interaction.user.id}>`, inline: true })
                             .addFields({ name: "ID", value: interaction.user.id, inline: true })
                             .addFields({ name: "🔹 SORUN: " + mesaj, value: "Açtığı yardım talebi boşunaysa gerekeni yapınız.", inline: false })
@@ -77,4 +78,5 @@ module.exports = {
             }
         })
 	},
+
 };
