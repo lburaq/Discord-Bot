@@ -1,5 +1,5 @@
 const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions] });
 const { REST, Routes } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 const config = require("./config.json");
@@ -49,10 +49,12 @@ for (const file of commandFiles) {
   })();
 
 
-
 client.on('ready', () => {
   console.log(`${client.user.tag} Başarılı şekilde aktif oldu!`);
 });
+
+const filter = (reaction)=>{return reaction.emoji.name === '⏹️'};
+module.exports.filter = filter;
 /*
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
