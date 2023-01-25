@@ -1,4 +1,6 @@
 {
     "token": "",
-    "clientid": ""
+    "clientid": "",
+    "OPENAI_ORG": "",
+    "OPENAI_KEY": ""
 }
