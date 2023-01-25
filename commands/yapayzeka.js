@@ -30,7 +30,7 @@ module.exports = {
     }
     catch(err){
         console.log(err);
-        return await interaction.editReply("Beklenmedik bir hata oluştu, tekrar deneyin!");
+        return await interaction.editReply("Çok fazla istek var, tekrar deneyin!");
     }
     },
 }
