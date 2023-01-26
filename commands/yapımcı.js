@@ -12,8 +12,8 @@ module.exports = {
         .setTitle('Yapımcıma ulaşmanın yolları')
         .addFields(
             {name: "**Discord**", value: `<@${"235139194853392384"}>`, inline: false},
-            {name: "**Steam**",value: "[Tıkla](https://steamcommunity.com/id/lburaq/)", inline: false},
-            {name: "**Mail**", value: "BurakG05@hotmail.com", inline: false},
+            {name: "**Steam**",value: "[Tıkla](https://steamcommunity.com/id/lburaq/)", inline: true},
+            {name: "**GitHub**", value: "[Tıkla](https://github.com/lburaq)", inline: true},
         )
 		await interaction.reply({embeds: [embed]});
 	},
