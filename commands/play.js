@@ -8,8 +8,10 @@ module.exports = {
 		.setDescription("Müzik aç")
         .addSubcommand((subcommand) =>
         subcommand.setName("normal").setDescription("yazıyla veya link aracılığı ile aç").addStringOption((option) => option.setName("mesaj").setDescription("Şarkının adı").setRequired(true)))
-        .addSubcommand((subcommand) => subcommand.setName("playlist").setDescription("Playlist için").addStringOption((option)=> option.setName("url").setDescription("Playlist link").setRequired(true))),
+        .addSubcommand((subcommand) => subcommand.setName("playlist").setDescription("Playlist için").addStringOption((option)=> option.setName("url").setDescription("Playlist link").setRequired(true)))
+        .setDMPermission(false),
 		async execute(client,interaction) {
+        try{
 		if (!interaction.member.voice.channel) return interaction.reply("Müzik açmak için bir sesli kanalda olmak zorundasın!")
 
 		const queue = await client.player.createQueue(interaction.guild, {
@@ -25,11 +27,10 @@ module.exports = {
             let url = await interaction.options.getString("url")
             const result = await client.player.search(url, {
                 requestedBy: interaction.user,
-                searchEngine: QueryType.AUTO
+                searchEngine: QueryType.AUTO,
             })
-            if (!result || result.tracks.length)
+            if (!result || !result.tracks.length)
                 return interaction.reply("Sonuç bulunamadı!")
-
             const playlist = await result.playlist
             await queue.addTracks(result.tracks)
             embed
@@ -73,6 +74,10 @@ module.exports = {
         await interaction.reply({
             embeds: [embed]
         })
-        
+    }
+    catch(err){
+        console.log(err);
+        return interaction.reply({content:"Beklenmedik bir hata oluştu, tekrar deneyin!", ephemeral: true});
+    }   
 	},
 }
