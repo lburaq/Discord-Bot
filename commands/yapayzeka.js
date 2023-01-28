@@ -18,11 +18,10 @@ module.exports = {
         await interaction.reply(`**[Komut işleniyor]**`);
         const response = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: `ChatGPT arkadaş canlısı bir sohbet botudur.\n\
-            ChatGPT: Merhaba, nasılsın?\n\
+            prompt: `ChatGPT: Merhaba, nasılsın?\n\
             ${interaction.user.username}: ${mesaj}\n\
             ChatGPT:`,
-            temperature: 0.9,
+            temperature: 1.0,
             max_tokens: 400,
             stop: ["ChatGPT:"],
         })
