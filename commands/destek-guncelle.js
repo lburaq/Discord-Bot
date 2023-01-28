@@ -18,6 +18,7 @@ module.exports = {
                 "sunucu":"",
                 "yetkili":"",
                 "kategori":"",
+                "ozelkanal":"",
             }]
         };
 
@@ -49,12 +50,11 @@ module.exports = {
                  }
                 
                 fs.writeFile('./serverler.json',json,'utf-8', (err)=> {
-                    if(err) throw err
+                    if(err) throw err;
                     interaction.reply({content: "Ayar başarılı şekilde güncellendi!", ephemeral: true})
                 });
                 
             }
-        })
-       
+        })     
 	},
 };

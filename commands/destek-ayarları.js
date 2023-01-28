@@ -31,6 +31,9 @@ module.exports = {
                     .addFields({ name: "Kategori", value: kategori.name, inline: true })
                     .addFields({ name: "Kategori ID", value: x.kategori, inline: true })
                     .addFields({ name: `\n`, value: `\n` })
+                    .addFields({ name: "Yazı Kanalı", value: x.ozelkanal == "" ? "Bulunamadı":`<#${x.ozelkanal}>`, inline: true})
+                    .addFields({ name: "Yazı Kanalı ID", value: x.ozelkanal == "" ? "Bulunamadı":x.ozelkanal, inline:true})
+                    .addFields({ name: `\n`, value: `\n` })
                     .setDescription(`**Sunucuda kayıtlı olan destek ayarları getirildi**`)
                     .setColor("#36eaf1")
                     .setTimestamp();

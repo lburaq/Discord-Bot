@@ -15,22 +15,26 @@ module.exports = {
                 "sunucu":"",
                 "yetkili":"",
                 "kategori":"",
+                "ozelkanal":"",
             }]
         };
         fs.readFile('./serverler.json', 'utf-8', (err, data) => {
             if (err)
                 throw err;
-            var yetkili = undefined;
+            var sunucu = undefined;
             obj = JSON.parse(data);
             liste = obj.sunucular;
              liste.filter(async (x) => {
                 if (x.sunucu === interaction.guildId) {
-                    yetkili = x.yetkili;
+                    sunucu = x.sunucu;
                     var kanalname = "destek" + interaction.user.id;
                     var kanalid = client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.name === kanalname);
                     if (kanalid) {
                         return interaction.reply({ content: `Zaten destek kanalı oluşturdunuz kanal: ${kanalid}`, ephemeral: true });
                     }
+                    const temp = interaction.guild.channels.cache.get(x.kategori);
+                    const temp2 = interaction.guild.roles.cache.get(x.yetkili);
+                    if(temp && temp2){          
                     await interaction.guild.channels.create({
                         name: "destek" + interaction.user.id,
                         type: ChannelType.GuildText,
@@ -45,7 +49,7 @@ module.exports = {
                                 allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages]
                             },
                             {
-                                id: yetkili,
+                                id: x.yetkili,
                                 allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.ReadMessageHistory, PermissionsBitField.Flags.ManageMessages]
                             },
                             {
@@ -62,7 +66,7 @@ module.exports = {
                             .addFields({ name: "Kullanıcı", value: `<@${interaction.user.id}>`, inline: true })
                             .addFields({ name: "ID", value: interaction.user.id, inline: true })
                             .addFields({ name: "🔹 SORUN: " + mesaj, value: "Açtığı yardım talebi boşunaysa gerekeni yapınız.", inline: false })
-                            .setDescription(`**Destek Oluşturuldu, <@&${yetkili}> en kısa sürede sizinle ilgilenecektir.**`)
+                            .setDescription(`**Destek Oluşturuldu, <@&${x.yetkili}> en kısa sürede sizinle ilgilenecektir.**`)
                             .setColor("#36eaf1")
                             .setTimestamp();
 
@@ -72,10 +76,15 @@ module.exports = {
 
                     });
                 }
+                else{
+                    return interaction.reply({content: "Kategori veya Rol bulunamadı, ayarları güncelleyiniz **/destek-guncelle**", ephemeral: true});
+                }
+            }
             });
-            if(yetkili === undefined){
+            if(sunucu === undefined){
                 return interaction.reply({content: "Sunucunun gerekli ayarları yapılmamış lütfen önce ayarları yapın **/destek-ayarla**", ephemeral: true})
             }
+            
         })
 	},
 

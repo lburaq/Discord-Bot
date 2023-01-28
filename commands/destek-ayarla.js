@@ -19,6 +19,7 @@ module.exports = {
                 "sunucu":"",
                 "yetkili":"",
                 "kategori":"",
+                "ozelkanal":"",
             }]
         };
         /*
@@ -53,7 +54,7 @@ module.exports = {
              });
           
              if(!mesaj){
-                obj.sunucular.push({sunucu:sunucu,yetkili:server,kategori:kanal});
+                obj.sunucular.push({sunucu:sunucu,yetkili:server,kategori:kanal,ozelkanal:""});
                  var json = JSON.stringify(obj);
                 fs.writeFile('./serverler.json',json,'utf-8', (err)=> {
                     if(err) throw err;
