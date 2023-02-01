@@ -5,9 +5,9 @@ module.exports = {
 	async execute(client,interaction) {
 		const queue = client.player.getQueue(interaction.guildId)
 
-		if (!queue) return await interaction.reply("Zaten bot çalmıyor")
+		if (!queue) return interaction.reply("Zaten bot çalmıyor")
 
 		queue.destroy()
-        await interaction.reply({content: "Görüşürüz", ephemeral: true})
+        interaction.reply({content: "Görüşürüz", ephemeral: true})
 	},
 }
