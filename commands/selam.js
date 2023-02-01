@@ -7,6 +7,6 @@ module.exports = {
 		.addUserOption((option) => option.setName('kullanıcı').setDescription('Merhaba diyeceğin kullanıcıyı seç').setRequired(true)),
 	async execute(client,interaction) {
 		let user = interaction.options.getUser("kullanıcı");
-		await interaction.reply(`<@${interaction.user.id}> sizi selamlıyor <@${user.id}>`);
+		interaction.reply(`<@${interaction.user.id}> sizi selamlıyor <@${user.id}>`);
 	},
 };
