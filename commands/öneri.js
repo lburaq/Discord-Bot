@@ -20,7 +20,7 @@ module.exports = {
             .addFields({name: "ID", value: interaction.user.id})
             .addFields({name: "Öneri", value: message})
 
-        await interaction.reply({content: "Öneriniz alınmıştır! Teşekkür ederiz.", ephemeral: true});
+        interaction.reply({content: "Öneriniz alınmıştır! Teşekkür ederiz.", ephemeral: true});
         client.guilds.cache.get(guildID).channels.cache.get(channelID).send({embeds: [embed]})
        // interaction.reply({ embeds: [embed] });
     }
