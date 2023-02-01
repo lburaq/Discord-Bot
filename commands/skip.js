@@ -6,13 +6,13 @@ module.exports = {
 	async execute(client,interaction) {
 		const queue = client.player.getQueue(interaction.guildId)
 
-		if (!queue) return await interaction.reply("Zaten bot çalmıyor")
+		if (!queue) return interaction.reply("Zaten bot çalmıyor")
 
         var currentSong = queue.current
 
 		queue.skip()
 
-        await interaction.reply({
+        interaction.reply({
             embeds: [
                 new EmbedBuilder().setDescription(`${currentSong.title} Başarılı şekilde geçildi`).setThumbnail(currentSong.thumbnail).setColor("#36eaf1")
             ]
