@@ -83,7 +83,7 @@ client.on('messageCreate', async message => {
 						}, 3000)
 					})
 				}
-				await message.guild.channels.create({
+				message.guild.channels.create({
 					name: "destek" + message.author.id,
 					type: ChannelType.GuildText,
 					parent: x.kategori,
@@ -105,7 +105,7 @@ client.on('messageCreate', async message => {
 							deny: [PermissionsBitField.Flags.ViewChannel]
 						},
 					],
-				}).then(async c => {
+				}).then(c => {
 					var embed = new EmbedBuilder()
 						.setThumbnail(message.author.displayAvatarURL())
 						.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
@@ -116,8 +116,8 @@ client.on('messageCreate', async message => {
 						.setDescription(`**Destek Oluşturuldu, <@&${x.yetkili}> en kısa sürede sizinle ilgilenecektir.**`)
 						.setColor("#36eaf1")
 						.setTimestamp();
-					await c.send({ embeds: [embed] });
-					return message.reply({ content: `Destek kanalı oluşturuldu kanal: <#${c.id}>` }).then(msg => {
+					 c.send({ embeds: [embed] });
+					 message.reply({ content: `Destek kanalı oluşturuldu kanal: <#${c.id}>` }).then(msg => {
 						setTimeout(() => {
 							msg.delete();
 							message.delete();
@@ -152,7 +152,7 @@ player.on("trackStart", async (queue, track) => {
 		.setFooter({ text: `Süre: ${track.duration}` })
 		.setColor("#36eaf1")
 
-	await queue.metadata.channel.send({ embeds: [embed] })
+	queue.metadata.channel.send({ embeds: [embed] })
 
 })
 
