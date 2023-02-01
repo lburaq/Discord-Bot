@@ -10,14 +10,14 @@ module.exports = {
     async execute(client,interaction) {
         const queue = client.player.getQueue(interaction.guildId)
         if (!queue || !queue.playing){
-            return await interaction.reply("Zaten bot çalmıyor")
+            return interaction.reply("Zaten bot çalmıyor")
         }
 
         const totalPages = Math.ceil(queue.tracks.length / 10) || 1
         const page = (interaction.options.getNumber("sayfa") || 1) - 1
 
         if (page > totalPages) 
-            return await interaction.reply(`Geçersiz sayfa numarası, toplam sayfa numarası: ${totalPages}`)
+            return interaction.reply(`Geçersiz sayfa numarası, toplam sayfa numarası: ${totalPages}`)
         
         const queueString = queue.tracks.slice(page * 10, page * 10 + 10).map((song, i) => {
             return `**${page * 10 + i + 1}.** \`[${song.duration}]\` ${song.title} -- <@${song.requestedBy.id}>`
@@ -26,7 +26,7 @@ module.exports = {
         const currentSong = queue.current
 
 
-        await interaction.reply({
+        interaction.reply({
                 embeds: [
                 new EmbedBuilder()
                     .setDescription(`**Şu anda çalan**\n` + 
