@@ -15,6 +15,6 @@ module.exports = {
             {name: "**Steam**",value: "[Tıkla](https://steamcommunity.com/id/lburaq/)", inline: true},
             {name: "**GitHub**", value: "[Tıkla](https://github.com/lburaq)", inline: true},
         )
-		await interaction.reply({embeds: [embed]});
+		interaction.reply({embeds: [embed]});
 	},
 };
