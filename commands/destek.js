@@ -35,7 +35,7 @@ module.exports = {
                     const temp = interaction.guild.channels.cache.get(x.kategori);
                     const temp2 = interaction.guild.roles.cache.get(x.yetkili);
                     if(temp && temp2){          
-                    await interaction.guild.channels.create({
+                    interaction.guild.channels.create({
                         name: "destek" + interaction.user.id,
                         type: ChannelType.GuildText,
                         parent: x.kategori,
