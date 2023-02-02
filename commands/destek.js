@@ -10,19 +10,11 @@ module.exports = {
         .setDMPermission(false),
 	async execute(client,interaction) {
 		var mesaj = interaction.options.getString("mesaj");
-        var obj = {
-            sunucular: [{
-                "sunucu":"",
-                "yetkili":"",
-                "kategori":"",
-                "ozelkanal":"",
-            }]
-        };
         fs.readFile('./serverler.json', 'utf-8', (err, data) => {
             if (err)
                 throw err;
             var sunucu = undefined;
-            obj = JSON.parse(data);
+            var obj = JSON.parse(data);
             liste = obj.sunucular;
              liste.filter(async (x) => {
                 if (x.sunucu === interaction.guildId) {
