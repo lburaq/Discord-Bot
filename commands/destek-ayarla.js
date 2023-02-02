@@ -14,14 +14,6 @@ module.exports = {
 		var server = interaction.options.getString("yetkili-rol-id");
         var kanal = interaction.options.getString("kategori-id");
         var sunucu = interaction.guildId;
-        var obj = {
-            sunucular: [{
-                "sunucu":"",
-                "yetkili":"",
-                "kategori":"",
-                "ozelkanal":"",
-            }]
-        };
         /*
         fs.appendFile('./serverler.json',JSON.stringify(serverler),(err) => {
             if(err) throw err;
@@ -40,7 +32,7 @@ module.exports = {
             if (err){
                 console.log(err);
             } else {
-                obj = JSON.parse(data);
+                var obj = JSON.parse(data);
                 var liste = obj.sunucular;
                 //for(var i =0;i<obj.sunucular.length;i++){
                 //    if(namef[i].sunucu === interaction.guild.name){
