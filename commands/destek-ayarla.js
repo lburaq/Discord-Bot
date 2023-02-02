@@ -25,7 +25,7 @@ module.exports = {
        if(roltipi === undefined){
         return interaction.reply({content: "**yetkili-rol-id** kısmı bir Rol id'si olmak zorunda!", ephemeral: true})
        }
-       if(kanaltype.type !== 4)
+       if(kanaltype === undefined || kanaltype.type !== 4)
             return interaction.reply({content: "**kategori-id** kısmı bir kategori id'si olmak zorunda!", ephemeral: true})
        var mesaj = undefined;
         fs.readFile('./serverler.json', 'utf-8', (err, data) => {
