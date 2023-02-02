@@ -17,9 +17,7 @@ module.exports = {
             list = list.filter((x)=>{
                 if(interaction.guildId === x.sunucu){
                     sunucu = x.sunucu;
-                     Object.keys(x).forEach(item => {
-                        delete x[item];
-                    });
+                     Object.keys(x).forEach(item => delete x[item]);
                 }
                 if(Object.keys(x).length !== 0){
                     return x;
