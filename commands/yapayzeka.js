@@ -16,7 +16,7 @@ module.exports = {
         const openai = new OpenAIApi(configuration);
         var mesaj = interaction.options.getString('mesaj');
         await interaction.reply(`**[Komut işleniyor]**`);
-        const response = await openai.createCompletion({
+         openai.createCompletion({
             model: "text-davinci-003",
             prompt: `ChatGPT: Merhaba, nasil yardimci olabilirim?\n\
             ${interaction.user.username}: ${mesaj}\n\
@@ -24,12 +24,10 @@ module.exports = {
             temperature: 1.0,
             max_tokens: 400,
             stop: ["ChatGPT:"],
-        })
-        return await interaction.editReply(`${response.data.choices[0].text}`);
+        }).then((response)=>{
+            return interaction.editReply(`${response.data.choices[0].text}`);
+        }).catch((err)=>{
+            return interaction.editReply("Çok fazla istek var, tekrar deneyin!");
+        });
     }
-    catch(err){
-        console.log(err);
-        return await interaction.editReply("Çok fazla istek var, tekrar deneyin!");
-    }
-    },
-}
+    };
