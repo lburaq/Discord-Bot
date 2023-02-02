@@ -15,7 +15,7 @@ module.exports = {
         });
         const openai = new OpenAIApi(configuration);
         var mesaj = interaction.options.getString('mesaj');
-        await interaction.reply(`**[Komut işleniyor]**`);
+         interaction.reply(`**[Komut işleniyor]**`);
          openai.createCompletion({
             model: "text-davinci-003",
             prompt: `ChatGPT: Merhaba, nasil yardimci olabilirim?\n\
