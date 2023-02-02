@@ -17,13 +17,9 @@ module.exports = {
             list = list.filter((x)=>{
                 if(interaction.guildId === x.sunucu){
                     sunucu = x.sunucu;
-                    var sil = ["sunucu","yetkili","kategori","ozelkanal"];
-		    sil.forEach(item => delete x[item]);
-		    /*
-                    for(var i =0;i<sil.length;i++){
-                        delete x[sil[i]];
-                    }
-		    */
+                     Object.keys(x).forEach(item => {
+                        delete x[item];
+                    });
                 }
                 if(Object.keys(x).length !== 0){
                     return x;
