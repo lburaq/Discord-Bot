@@ -13,14 +13,6 @@ module.exports = {
 	async execute(client,interaction) {
 		var server = interaction.options.getString("yetkili-rol-id");
         var kategori = interaction.options.getString("kategori-id");
-        var obj = {
-            sunucular: [{
-                "sunucu":"",
-                "yetkili":"",
-                "kategori":"",
-                "ozelkanal":"",
-            }]
-        };
 
         const kanaltype = interaction.guild.channels.cache.get(kategori)
         const kategoritype = interaction.guild.roles.cache.get(server);
@@ -35,7 +27,7 @@ module.exports = {
             if (err){
                 throw err
             } else {
-                obj = JSON.parse(data)
+                var obj = JSON.parse(data)
                 var liste = obj.sunucular;
 
                  liste.filter((x)=> {
