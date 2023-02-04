@@ -27,7 +27,7 @@ module.exports = {
        }
        if(kanaltype === undefined || kanaltype.type !== 4)
             return interaction.reply({content: "**kategori-id** kısmı bir kategori id'si olmak zorunda!", ephemeral: true})
-       var mesaj = undefined;
+       var kontrol = false;
         fs.readFile('./serverler.json', 'utf-8', (err, data) => {
             if (err){
                 console.log(err);
@@ -41,11 +41,12 @@ module.exports = {
             //  }
              liste.filter((x)=> {
                 if(x.sunucu === interaction.guildId){
-                    return mesaj = interaction.reply({content: "Zaten ayar var, değiştirmek istiyorsan **/destek-guncelle** kullan!", ephemeral: true});
+                    interaction.reply({content: "Zaten ayar var, değiştirmek istiyorsan **/destek-guncelle** kullan!", ephemeral: true});
+		    kontrol = true;
                 }
              });
           
-             if(!mesaj){
+             if(!kontrol){
                 obj.sunucular.push({sunucu:sunucu,yetkili:server,kategori:kanal,ozelkanal:""});
                  var json = JSON.stringify(obj);
                 fs.writeFile('./serverler.json',json,'utf-8', (err)=> {
