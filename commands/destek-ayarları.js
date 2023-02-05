@@ -10,13 +10,11 @@ module.exports = {
 	async execute(client,interaction) {
         var embed = new EmbedBuilder();
         fs.readFile('./serverler.json', 'utf-8', (err, data)=> {
-            if(err) console.log(err);
-            var sunucu = undefined;
+            if(err) return interaction.reply({content: "Üzgünüm sunucu dosyalarını okuyamadım, botun yapımcısıyla iletişime geçin.", ephemeral: true})
             var obj = JSON.parse(data);
-            var list = obj.sunucular;
-            list.filter((x)=>{
+            var liste = obj.sunucular;
+            var list = liste.find((x)=>{
                 if(x.sunucu === interaction.guildId){
-                    sunucu = x.sunucu;
                     const kategori = interaction.guild.channels.cache.get(x.kategori);
                     const yetkili = interaction.guild.roles.cache.get(x.yetkili);
                     if(!kategori || !yetkili){
@@ -40,7 +38,7 @@ module.exports = {
                     return interaction.reply({embeds: [embed], ephemeral: true})
                 }
             })
-            if(sunucu === undefined){
+            if(!list){
                 return interaction.reply({content: "Sunucunun gerekli ayarları yapılmamış lütfen önce ayarları yapın **/destek-ayarla**", ephemeral: true});
         }
         })
