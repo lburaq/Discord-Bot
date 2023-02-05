@@ -15,17 +15,17 @@ module.exports = {
         var kategori = interaction.options.getString("kategori-id");
 
         const kanaltype = interaction.guild.channels.cache.get(kategori)
-        const kategoritype = interaction.guild.roles.cache.get(server);
-       if(kategoritype === undefined){
+        const roltipi = interaction.guild.roles.cache.get(server);
+       if(roltipi === undefined){
         return interaction.reply({content: "**yetkili-rol-id** kısmı bir Rol id'si olmak zorunda!", ephemeral: true})
        }
-       if(kanaltype.type !== 4)
+       if(kanaltype === undefined || kanaltype.type !== 4)
             return interaction.reply({content: "**kategori-id** kısmı bir kategori id'si olmak zorunda!", ephemeral: true})
         
        var json = undefined;
         fs.readFile('./serverler.json', 'utf-8', (err, data)=> {
             if (err){
-                throw err
+                return interaction.reply({content: "Üzgünüm sunucu dosyalarını okuyamadım, botun yapımcısıyla iletişime geçin.", ephemeral: true})
             } else {
                 var obj = JSON.parse(data)
                 var liste = obj.sunucular;
