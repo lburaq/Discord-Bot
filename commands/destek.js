@@ -15,8 +15,8 @@ module.exports = {
                 throw err;
             var sunucu = undefined;
             var obj = JSON.parse(data);
-            liste = obj.sunucular;
-             liste.filter(async (x) => {
+           var liste = obj.sunucular;
+             liste.filter((x) => {
                 if (x.sunucu === interaction.guildId) {
                     sunucu = x.sunucu;
                     var kanalname = "destek" + interaction.user.id;
