@@ -15,13 +15,13 @@ module.exports = {
         var mesaj = interaction.options.getString('kanal-id');
         var kanal = interaction.guild.channels.cache.get(mesaj);
         fs.readFile('./serverler.json','utf-8', (err,data)=>{
-            if(err) console.log(err);
+            if(err) return interaction.reply({content: "Üzgünüm sunucu dosyalarını okuyamadım, botun yapımcısıyla iletişime geçin.", ephemeral: true})
             var obj = JSON.parse(data);
             var sunucular = obj.sunucular;
             sunucular.filter((x)=>{
                 if(x.sunucu === interaction.guildId){
                     sunucu = x.sunucu;
-                    if(kanal.type !=0){
+                    if(kanal === undefined || kanal.type !=0){
                         return interaction.reply({content: "**kanal-id** kısmı bir yazı kanalı id'si olmak zorunda!", ephemeral: true});
                     }
                     if(x.ozelkanal === ""){
